@@ -20,6 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 
 public class MetricsUiBundle implements Bundle {
     
+    //private final String RESOURCE_PATH = "metrics-ui";
+    private final String RESOURCE_PATH = "charming";
+    
     private final String basePath;
     
     public MetricsUiBundle(String basePath) {
@@ -30,12 +33,12 @@ public class MetricsUiBundle implements Bundle {
     }
     
     public MetricsUiBundle() {
-        this.basePath = "/metrics-ui";
+        this.basePath = "/"+RESOURCE_PATH;
     }
     
     @Override
     public void initialize(Bootstrap<?> bootstrap) {       
-        bootstrap.addBundle(new AssetsBundle("/metrics-ui/", basePath, "index.htm"));
+        bootstrap.addBundle(new AssetsBundle("/"+RESOURCE_PATH+"/", basePath, "index.htm"));
     }
 
     @Override
@@ -43,7 +46,7 @@ public class MetricsUiBundle implements Bundle {
         
         if(!basePath.equals("")) {
             //redirect metrics-ui to metrics-ui/
-            FilterRegistration.Dynamic filterRegistration = environment.servlets().addFilter("metrics-ui", new Filter(){
+            FilterRegistration.Dynamic filterRegistration = environment.servlets().addFilter(RESOURCE_PATH, new Filter(){
                 @Override
                 public void init(FilterConfig filterConfig) throws ServletException {}
     

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="lib/gridster.css">
+<link rel="stylesheet" type="text/css" href="http://gridster.net/assets/css/style.css">
+<script src="lib/jquery.js"></script>
+<script src="lib/kitejs.js"></script>
+<script src="lib/handlebars.js"></script>
+<script src="lib/gridster.js"></script>
+<script src="lib/jquery.knob.js"></script>
+
+<script src="core/GridsterLayout.js"></script>
+<script src="core/DashboardPanel.js"></script>
+<script src="core/MetricsCharm.js"></script>
+
+<script src="charms/meter/MeterCharm.js"></script>
+
+<script id="my-widget-template" type="text/x-handlebars-template">
+  This is my widget
+</script>
+
+<script id="my-widget-template2" type="text/x-handlebars-template">
+  Another one
+</script>
+
+
+<script>
+    
+    
+    
+
+    jQuery(document).ready(function () {
+        var temp;    
+    	
+    	var dashboard = new charming.core.DashboardPanel({
+                items : [
+                    new charming.core.MetricsCharm({
+                        tpl : $('#my-widget-template'),
+                        width : 2
+                    }),
+
+                    new charming.core.MetricsCharm({
+                        tpl : $('#my-widget-template2'),
+                        height : 2
+                    }),
+                    
+                    temp = new charming.charms.MeterCharm({
+                    	
+                    })
+                ]
+            });
+            dashboard.render($('#dashboard'));
+
+            setInterval(function(){
+            	
+            	$.getJSON('/api/metrics', function(data) {
+                    	var data = data.gauges;
+
+            		var trimmedData = kite.extract(data, 'jvm.memory.heap.used', 'jvm.memory.heap.max');
+ 
+                    	temp.data(trimmedData);
+                    }               
+                );
+            }, 1000);
+
+
+
+    });
+
+</script>
+</head>
+
+<body style="background-color:#006699">
+
+
+<div id="dashboard">
+    
+</div>
+
+</body>
+
+</html>
