@@ -35,7 +35,8 @@ kite.define("charming.core.MetricsCharm", function(Widget){
 				$.ajax({
 		            url: path,
 		            async : false,
-		            cache: true,
+		            cache : false,
+		            //cache: true,
 		            success: function(data) {
 		                source = data;
 		            }               

@@ -1,4 +1,41 @@
-#dashboard {
-	
-	background-color:gray;
+.metric-body {
+   display: table;
+   width: 100%;
+  
+   width:100%;
+   height:100%;
 }
+
+.meter-additional {   
+ 
+   height: 100%;
+text-align: center;
+vertical-align: top;
+}
+
+.meter-knob { 
+	
+}
+
+.meter-additional-inner {
+  bottom: 0;
+  height: 50%;
+  left: 0;
+  margin: auto 0;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  display:table;
+ 
+}
+
+.meter-additional-inner .ival {
+	 display: table-cell;
+     vertical-align:middle;
+        text-align: center;
+        padding-left:5px;
+        font-size:20px;
+        color:#AAA;
+        font-family:Arial;
+}
+
